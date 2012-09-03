@@ -46,4 +46,5 @@ user@host:~/tmp$ update-rc.d ramdisk defaults
 
 ### Configuration
 
-TODO
+Refer to the [Configuration](https://github.com/brulejr/ramdisk-devtools/wiki/Configuration) page for the details on 
+tuning the RAM disk and its auto-loading of packages.
