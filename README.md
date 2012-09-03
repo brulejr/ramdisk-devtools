@@ -12,12 +12,12 @@ Since installation is currently manual, perform the following steps to setup thi
 and install it using the following steps:
 
 > ```bash
-user@host:~/tmp$ tar zxvf JSON-2.53.tar.gz
-user@host:~/tmp$ cd JSON-2.53/
-user@host:~/tmp$ perl Makefile.PL INSTALL_BASE=/usr/local
-user@host:~/tmp$ make
-user@host:~/tmp$ make test
-user@host:~/tmp$ make install
+user@host:~/tmp$ __tar zxvf JSON-2.53.tar.gz__
+user@host:~/tmp$ __cd JSON-2.53/__
+user@host:~/tmp$ __perl Makefile.PL INSTALL_BASE=/usr/local__
+user@host:~/tmp$ __make__
+user@host:~/tmp$ __make test__
+user@host:~/tmp$ __make install__
 ```
 
 > Download the [File Slurp module](http://search.cpan.org/~uri/File-Slurp-9999.19/lib/File/Slurp.pm) into a temporary 
@@ -36,7 +36,7 @@ user@host:~/tmp$ make install
 Ensure that all files are owned by `root` with a group of `root`. Ensure that the `/etc/init.d/ramdisk*` files are 
 executable only by user.
 
-> Install the *init.d* script into the boot process. For Ubuntu systems, this is accomplished by executing the following
+> Install the __init.d__ script into the boot process. For Ubuntu systems, this is accomplished by executing the following
 command:
 ```bash
 user@host:~/tmp$ update-rc.d ramdisk defaults
