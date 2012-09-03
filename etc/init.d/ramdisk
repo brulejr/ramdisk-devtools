@@ -1,0 +1,158 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          ramdisk
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Manages a RAM disk
+# Description:       Creates, populates, and manages a RAM disk for high speed
+#                    access
+### END INIT INFO
+
+# Author: Jon Brule <brulejr@gmail.com>
+
+# Do NOT "set -e"
+
+# PATH should only include /usr/* if it runs after the mountnfs.sh script
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+DESC="Manages a RAM disk for high-speed access"
+NAME=ramdisk
+DIRNAME=/etc/init.d
+SCRIPTNAME=$DIRNAME/$NAME
+
+# Read configuration variable file if it is present
+[ -r /etc/default/$NAME ] && . /etc/default/$NAME
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.2-14) to ensure that this file is present
+# and status_of_proc is working.
+. /lib/lsb/init-functions
+
+# Executes the given command only if there is no error present
+cmd()
+{
+	[ -n "$ERRCODE" ] || {
+		$1
+	}
+}
+
+# Performs the start logic
+do_start()
+{
+	# setup ram disk
+	mountpoint -q $RAMDISK_BASE && error "Already mounted - $RAMDISK_BASE"
+	cmd "mkdir -p $RAMDISK_BASE" \
+		|| error "Cannot create mount point - $RAMDISK_BASE"
+	cmd "mount -t tmpfs -o size=$RAMDISK_SIZE tmpfs $RAMDISK_BASE" \
+		|| error"Cannot create RAM disk!"
+
+	# load required software into ram disk
+	[[ -z "$ERRCODE" && -n "$RAMDISK_DATA" ]] && {
+		truncate --size 0 ${RAMDISK_PROF}
+		$DIRNAME/ramdisk_package.pl ${RAMDISK_BASE} ${RAMDISK_PROF} ${RAMDISK_DATA} | source /dev/stdin
+		chown -R root:root ${RAMDISK_BASE}
+	}
+
+	# return current status
+	return ${ERRCODE:-0}
+}
+
+# Performs the stop logic
+do_stop()
+{
+	mountpoint -q $RAMDISK_BASE || error "Not mounted - $RAMDISK_BASE"
+	cmd "umount $RAMDISK_BASE" || error "Cannot unmount $RAMDISK_BASE"
+	cmd "rmdir $RAMDISK_BASE" \
+		|| error "Cannot remove mount point - $RAMDISK_BASE"
+	return ${ERRCODE:-0}
+}
+
+# Performs the status logic
+do_status()
+{
+	mountpoint -q $RAMDISK_BASE || error "Not mounted - $RAMDISK_BASE"
+	cmd "df -k $RAMDISK_BASE" || error "Cannot stat - $RAMDISK_BASE"
+
+}
+
+# Writes and sets an error condition to block command execution
+error()
+{
+	messages=( "$@" )
+
+	# If the last parameter is a number, it's not part of the messages
+	ERRCODE=1
+	last_parameter="${messages[@]: -1}"
+	if [[ "$last_parameter" =~ ^[0-9]*$ ]]
+	then
+		ERRCODE=$last_parameter
+		unset messages[$((${#messages[@]} - 1))]
+	fi
+
+	log_failure_msg "${messages[@]}"
+
+	return $ERRCODE
+}
+
+# Validate required settings from variable file
+[ -n "$RAMDISK_BASE" ] || error "ERROR: Missing RAMDISK_BASE variable!"
+[ -n "$RAMDISK_SIZE" ] || error "ERROR: Missing RAMDISK_SIZE variable!"
+[ -n "$RAMDISK_DATA" ] || error "ERROR: Missing RAMDISK_DATA variable!"
+[ -n "$RAMDISK_PROF" ] || error "ERROR: Missing RAMDISK_PROF variable!"
+[ -z "$ERRCODE" ] || exit $ERRCODE
+
+# Process command
+case "$1" in
+  start)
+	[ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
+	do_start
+	case "$?" in
+		0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+		2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+	esac
+	;;
+  stop)
+	[ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
+	do_stop
+	case "$?" in
+		0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+		2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+	esac
+	;;
+  status)
+	do_status
+	;;
+  restart)
+	#
+	# If the "reload" option is implemented then remove the
+	# 'force-reload' alias
+	#
+	log_daemon_msg "Restarting $DESC" "$NAME"
+	do_stop
+	case "$?" in
+	  0|1)
+		do_start
+		case "$?" in
+			0) log_end_msg 0 ;;
+			1) log_end_msg 1 ;; # Old process is still running
+			*) log_end_msg 1 ;; # Failed to start
+		esac
+		;;
+	  *)
+	  	# Failed to stop
+		log_end_msg 1
+		;;
+	esac
+	;;
+  *)
+	echo $DESC
+	echo "Usage: $SCRIPTNAME {start|stop|status|restart}" >&2
+	exit 3
+	;;
+esac
+
+:
