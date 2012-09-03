@@ -9,7 +9,7 @@ SUMMARY - TODO
 Since installation is currently manual, perform the following steps to setup this development RAM disk:
 
 ##### Perl JSON Module
-Download the Perl JSON module into a temporary directory, and install it using the following steps:
+Download the [Perl JSON module](http://search.cpan.org/~makamaka/JSON-2.53/lib/JSON.pm) into a temporary directory, and install it using the following steps:
 
 ```bash
 tar zxvf JSON-2.53.tar.gz
