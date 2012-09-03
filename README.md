@@ -12,7 +12,7 @@ Since installation is currently manual, perform the following steps to setup thi
 and install it using the following steps:
 
 > ```bash
-user@host:~/tmp$ __tar zxvf JSON-2.53.tar.gz__
+user@host:~/tmp$ **tar zxvf JSON-2.53.tar.gz**
 user@host:~/tmp$ __cd JSON-2.53/__
 user@host:~/tmp$ __perl Makefile.PL INSTALL_BASE=/usr/local__
 user@host:~/tmp$ __make__
