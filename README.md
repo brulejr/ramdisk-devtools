@@ -13,9 +13,9 @@ Download the [Perl JSON module](http://search.cpan.org/~makamaka/JSON-2.53/lib/J
 
 ```bash
 user@host:~/tmp$ tar zxvf JSON-2.53.tar.gz
-cd JSON-2.53/
-perl Makefile.PL INSTALL_BASE=/usr/local
-make
-make test
-make install
+user@host:~/tmp$ cd JSON-2.53/
+user@host:~/tmp$ perl Makefile.PL INSTALL_BASE=/usr/local
+user@host:~/tmp$ make
+user@host:~/tmp$ make test
+user@host:~/tmp$ make install
 ```
