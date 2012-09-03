@@ -38,7 +38,9 @@ executable only by user.
 
 > Install the *init.d* script into the boot process. For Ubuntu systems, this is accomplished by executing the following
 command:
-`update-rc.d ramdisk defaults`
+```bash
+update-rc.d ramdisk defaults
+```
 
 > Reboot in order to activate the RAM disk.
 
