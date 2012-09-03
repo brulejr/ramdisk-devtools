@@ -29,7 +29,7 @@ user@host:~/tmp$ cd File-Slurp-9999.19/
 user@host:~/tmp$ perl Makefile.PL INSTALL_BASE=/usr/local
 user@host:~/tmp$ make
 user@host:~/tmp$ make test
-$ make install
+user@host:~/tmp$ make install
 ```
 
 > Copy the files from the project's `etc/init.d` and `etc/default` directories into their corresponding system paths. 
@@ -39,7 +39,7 @@ executable only by user.
 > Install the *init.d* script into the boot process. For Ubuntu systems, this is accomplished by executing the following
 command:
 ```bash
-update-rc.d ramdisk defaults
+user@host:~/tmp$ update-rc.d ramdisk defaults
 ```
 
 > Reboot in order to activate the RAM disk.
