@@ -31,3 +31,9 @@ user@host:~/tmp$ make
 user@host:~/tmp$ make test
 $ make install
 ```
+
+Copy the files from the project's `etc/init.d` and `etc/default` directories into their corresponding system paths. 
+Ensure that all files are owned by `root` with a group of `root`. Ensure that the `/etc/init.d/ramdisk*` files are 
+executable only by user.
+
+Reboot in order to activate the RAM disk.
