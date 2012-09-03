@@ -20,10 +20,10 @@ user@host:~/tmp$ make test
 user@host:~/tmp$ make install
 ```
 
-Download the [File Slurp module](http://search.cpan.org/~uri/File-Slurp-9999.19/lib/File/Slurp.pm) into a temporary 
+> Download the [File Slurp module](http://search.cpan.org/~uri/File-Slurp-9999.19/lib/File/Slurp.pm) into a temporary 
 directory, and install it using the following steps:
 
-```bash
+> ```bash
 user@host:~/tmp$ tar zxvf File-Slurp-9999.19.tar.gz
 user@host:~/tmp$ cd File-Slurp-9999.19/
 user@host:~/tmp$ perl Makefile.PL INSTALL_BASE=/usr/local
@@ -32,8 +32,12 @@ user@host:~/tmp$ make test
 $ make install
 ```
 
-Copy the files from the project's `etc/init.d` and `etc/default` directories into their corresponding system paths. 
+> Copy the files from the project's `etc/init.d` and `etc/default` directories into their corresponding system paths. 
 Ensure that all files are owned by `root` with a group of `root`. Ensure that the `/etc/init.d/ramdisk*` files are 
 executable only by user.
 
-Reboot in order to activate the RAM disk.
+> Reboot in order to activate the RAM disk.
+
+### Configuration
+
+TODO
