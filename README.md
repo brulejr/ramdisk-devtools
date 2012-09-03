@@ -36,6 +36,10 @@ $ make install
 Ensure that all files are owned by `root` with a group of `root`. Ensure that the `/etc/init.d/ramdisk*` files are 
 executable only by user.
 
+> Install the *init.d* script into the boot process. For Ubuntu systems, this is accomplished by executing the following
+command:
+`update-rc.d ramdisk defaults`
+
 > Reboot in order to activate the RAM disk.
 
 ### Configuration
