@@ -8,7 +8,7 @@ SUMMARY - TODO
 
 Since installation is currently manual, perform the following steps to setup this development RAM disk:
 
-1. Download the [Perl JSON module](http://search.cpan.org/~makamaka/JSON-2.53/lib/JSON.pm) into a temporary directory, 
+Download the [Perl JSON module](http://search.cpan.org/~makamaka/JSON-2.53/lib/JSON.pm) into a temporary directory, 
 and install it using the following steps:
 
 ```bash
@@ -20,7 +20,7 @@ user@host:~/tmp$ make test
 user@host:~/tmp$ make install
 ```
 
-2. Download the [File Slurp module](http://search.cpan.org/~uri/File-Slurp-9999.19/lib/File/Slurp.pm) into a temporary 
+Download the [File Slurp module](http://search.cpan.org/~uri/File-Slurp-9999.19/lib/File/Slurp.pm) into a temporary 
 directory, and install it using the following steps:
 
 ```bash
