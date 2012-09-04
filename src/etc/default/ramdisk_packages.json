@@ -7,18 +7,21 @@
       "path": "/bin"
      },
     "ant": {
+      "url": "http://apache.cs.utah.edu/ant/binaries/apache-ant-1.8.4-bin.tar.gz",
       "dist": "apache-ant-1.8.4-bin.tar.gz",
       "base": "apache-ant-1.8.4",
       "evar": "ANT_HOME",
       "path": "/bin"
      },
     "maven": {
+      "url": "http://mirror.cc.columbia.edu/pub/software/apache/maven/binaries/apache-maven-3.0.4-bin.tar.gz",
       "dist": "apache-maven-3.0.4-bin.tar.gz",
       "base": "apache-maven-3.0.4",
       "evar": "MAVEN_HOME",
       "path": "/bin"
      },
     "sts": {
+      "url": "http://download.springsource.com/release/STS/3.0.0/dist/e4.2/spring-tool-suite-3.0.0.RELEASE-e4.2-linux-gtk-x86_64.tar.gz",
       "dist": "spring-tool-suite-3.0.0.RELEASE-e4.2-linux-gtk-x86_64.tar.gz",
       "base": "springsource/sts-3.0.0.RELEASE",
       "perm": "root:root",

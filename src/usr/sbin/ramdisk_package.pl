@@ -15,8 +15,9 @@ foreach my $name (keys $data->{packages}) {
   my $pkg = ${data}->{packages}->{$name};
   my $evar = $pkg->{evar};
   my $path = $pkg->{path};
-  my $src = ${cache}/$pkg->{dist};
-  push @cmds, "[ -e \"$src\" ] || wget -q -P ${cache} $pkg->{url}";
+  my $dist = $pkg->{dist};
+  my $src = "${cache}/$dist";
+  push @cmds, "[ -e \"$src\" ] || (echo \"Downloading ${dist}...\"; wget -O ${cache}/${dist} $pkg->{url})";
   push @cmds, "tar zxf $src -C $base";
   push @cmds, "ln -s $base/$pkg->{base} $base/$name";
   push @cmds, "echo 'export $evar=$base/$name' >> $prof";

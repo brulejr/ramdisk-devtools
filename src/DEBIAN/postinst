@@ -64,7 +64,7 @@ if [ "$1" = "configure" ]; then
             "Please enter the mount directory for the ramdisk:" \
             "This hostname must be alphanumeric or an IP Address. Please re-enter:" \
             10 75
-  sed -i "s/\(^RAMDISK_BASE *= *\)\(.*\)/\1${RAMDISK_BASE}/" $CFGFILE
+  sed -i "s#\(^RAMDISK_BASE *= *\)\(.*\)#\1${RAMDISK_BASE}#" $CFGFILE
 
   RAMDISK_SIZE=$(grep RAMDISK_SIZE ${CFGFILE} | cut -f2 -d"=" | tr -d ' ')
   get_input RAMDISK_SIZE \
@@ -74,6 +74,6 @@ if [ "$1" = "configure" ]; then
             "Please enter the web service port:" \
             "This size must be a three- or four-digit number followed by K or M. Please re-enter:" \
             10 75
-  sed -i "s/\(^RAMDISK_SIZE *= *\)\(.*\)/\1${RAMDISK_SIZE}/" $CFGFILE
+  sed -i "s#\(^RAMDISK_SIZE *= *\)\(.*\)#\1${RAMDISK_SIZE}#" $CFGFILE
 
 fi
