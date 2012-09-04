@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+if [ "$1" = "install" ]; then
+
+  # install pre-requisite PERL modules
+  perl -MCPAN -e shall <<EOM
+    install JSON
+    install File::Slurper
+    install Error
+    exit
+EOM
+
+fi

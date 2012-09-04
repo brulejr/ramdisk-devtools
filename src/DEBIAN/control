@@ -1,0 +1,9 @@
+Package: TBD
+Version: TBD
+Section: admin
+Priority: optional
+Architecture: all
+Depends: perl-base (>= 5.8.8), dialog (>= 1.1)
+Maintainer: Jon Brule <brulejr@gmail.com>
+Description: Development Tools RAM Disk
+ Facilitates the usage of common development tools from high-speed RAM disk.

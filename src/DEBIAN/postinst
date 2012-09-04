@@ -1,0 +1,79 @@
+#!/bin/bash
+set -e
+
+CFGFILE=/etc/default/ramdisk
+TEMPFILE=`tempfile 2>/dev/null` || tempfile=/tmp/file$$
+
+###############################################################################
+# BEGIN: Function definitions
+#
+
+get_input() {
+  local __resultvar=$1
+  local __default=$2
+  local __pattern=$3
+  local __title=$4
+  local __msg=$5
+  local __errmsg=$6
+  local __height=$7
+  local __width=$8
+  local __prompt=${__msg}
+  local __value="${__default}"
+  local __valid=""
+
+  while [ -z "${__valid}" ]
+  do
+    dialog --title "$__title" \
+           --clear \
+           --no-cancel \
+           --inputbox \
+           "\n${__prompt}" $__height $__width $__value 2> ${TEMPFILE}
+    case $? in
+      0)
+        __value="`cat ${TEMPFILE}`"
+        set +e
+        echo "${__value}" | perl -nle "m/${__pattern}/ || exit 1"
+        if [ $? -eq 0 ]; then
+          __valid="yes"
+        else
+          __valid=""
+          __prompt=${__errmsg}
+        fi
+        set -e
+        ;;
+      255)
+        exit ;;
+    esac
+  done
+
+  eval $__resultvar=${__value}
+}
+
+# END: Function definitions
+###############################################################################
+
+
+if [ "$1" = "configure" ]; then
+
+  # adapt configuration
+  RAMDISK_BASE=$(grep RAMDISK_BASE ${CFGFILE} | cut -f2 -d"=" | tr -d ' ')
+  get_input RAMDISK_BASE \
+            "${RAMDISK_BASE}" \
+            "[^\0]+" \
+            "ramdisk-devtools - mount directory" \
+            "Please enter the mount directory for the ramdisk:" \
+            "This hostname must be alphanumeric or an IP Address. Please re-enter:" \
+            10 75
+  sed -i "s/\(^RAMDISK_BASE *= *\)\(.*\)/\1${RAMDISK_BASE}/" $CFGFILE
+
+  RAMDISK_SIZE=$(grep RAMDISK_SIZE ${CFGFILE} | cut -f2 -d"=" | tr -d ' ')
+  get_input RAMDISK_SIZE \
+            "${RAMDISK_SIZE}" \
+            "^\d{3,4}[kmKM]$" \
+            "ramdisk-devtools - ram disk size" \
+            "Please enter the web service port:" \
+            "This size must be a three- or four-digit number followed by K or M. Please re-enter:" \
+            10 75
+  sed -i "s/\(^RAMDISK_SIZE *= *\)\(.*\)/\1${RAMDISK_SIZE}/" $CFGFILE
+
+fi

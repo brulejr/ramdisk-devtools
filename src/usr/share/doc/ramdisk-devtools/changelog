@@ -1,0 +1,5 @@
+rmtbkup-client (1.0.0) unstable; urgency=low
+
+  * Initial database-driven version
+
+ -- Jon Brule <brulej@gmail.com>  Tue, 04 Sep 2012 09:34:00 -0500
