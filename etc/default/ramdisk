@@ -1,4 +1,0 @@
-RAMDISK_BASE=/media/ramdisk
-RAMDISK_SIZE=1024M
-RAMDISK_DATA=/etc/default/ramdisk_packages.json
-RAMDISK_PROF=/etc/profile.d/ramdisk.sh

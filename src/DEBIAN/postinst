@@ -76,4 +76,6 @@ if [ "$1" = "configure" ]; then
             10 75
   sed -i "s#\(^RAMDISK_SIZE *= *\)\(.*\)#\1${RAMDISK_SIZE}#" $CFGFILE
 
+  update-rc.d ramdisk defaults 80 20
+
 fi
