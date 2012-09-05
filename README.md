@@ -19,8 +19,8 @@ root@host:~# dpkg --install ramdisk-devtools_0.0.1.deb
 ```
 
 This will prompt for two parameteric settings:
-1. The directory on which the RAM disk will be mounted (defaults to **/media/ramdisk**)
-2. The size of the RAM disk (defaults to **1024M**)
+* The directory on which the RAM disk will be mounted (defaults to **/media/ramdisk**)
+* The size of the RAM disk (defaults to **1024M**)
 
 ### Configuration
 
