@@ -13,8 +13,14 @@ a package-basis.
 
 ### Setup
 
-Refer to the [Setup](https://github.com/brulejr/ramdisk-devtools/wiki/Setup) page for the manual installation 
-instructions.
+Install the auto-loading RAM disk using its Debian package by performing the following comand:
+```
+root@host:~# dpkg --install ramdisk-devtools_0.0.1.deb 
+```
+
+This will prompt for two parameteric settings:
+* The directory on which the RAM disk will be mounted (defaults to **/media/ramdisk**)
+* The size of the RAM disk (defaults to **1024M**)
 
 ### Configuration
 
