@@ -13,7 +13,8 @@ a package-basis.
 
 ### Setup
 
-Install the auto-loading RAM disk using its Debian package by performing the following comand:
+Install the auto-loading RAM disk using its [Debian package](https://github.com/brulejr/ramdisk-devtools/blob/master/ramdisk-devtools_0.0.2.deb)
+by performing the following comand:
 ```
 root@host:~# dpkg --install ramdisk-devtools_0.0.2.deb 
 ```
