@@ -6,6 +6,9 @@ that benefit from memory-speed access. For example, both the [Java JDK](http://w
 and [Spring Tool Suite](http://www.springsource.org/sts) can bootstrap and run considerably faster when loaded
 from a RAM disk.
 
+If the **RAMDISK_IMAGE** parameter is set (see the [Configuration](https://github.com/brulejr/ramdisk-devtools/wiki/Configuration) 
+page), then the RAM disk contents are saved across a stop / start sequence.
+
 A JSON configuration file dictates which tools are loaded and how they are mapped into the environment. Currently, only
 *tgz* format is supported, although that will change to include *zip* as well. Eventually, lifecycle scripts will
 be integrated to allow any arbitrary distribution format to be used so long as an appropriate handler is provided on
