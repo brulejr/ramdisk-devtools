@@ -51,11 +51,20 @@ do_start()
 		|| error"Cannot create RAM disk!"
 
 	# load required software into ram disk
-	[[ -z "$ERRCODE" && -n "$RAMDISK_DATA" ]] && {
-		truncate --size 0 ${RAMDISK_PROF}
-		ramdisk_package.pl ${RAMDISK_BASE} ${RAMDISK_CACHE} ${RAMDISK_PROF} ${RAMDISK_DATA} | source /dev/stdin
-		chown -R root:root ${RAMDISK_BASE}
-	}
+	if [[ -n "$RAMDISK_IMAGE" && -d "$RAMDISK_IMAGE" ]]
+	then
+		cp -pr $RAMDISK_IMAGE/* $RAMDISK_BASE
+	else
+		[[ -z "$ERRCODE" && -n "$RAMDISK_DATA" ]] && {
+			truncate --size 0 ${RAMDISK_PROF}
+			ramdisk_package.pl ${RAMDISK_BASE} \
+					   ${RAMDISK_CACHE} \
+					   ${RAMDISK_PROF} \
+					   ${RAMDISK_DATA} | source /dev/stdin
+			chown -R root:root ${RAMDISK_BASE}
+		}
+
+	fi
 
 	# return current status
 	return ${ERRCODE:-0}
@@ -65,6 +74,12 @@ do_start()
 do_stop()
 {
 	mountpoint -q $RAMDISK_BASE || error "Not mounted - $RAMDISK_BASE"
+	if [[ -n "$RAMDISK_IMAGE" ]]
+	then
+		rm -fr $RAMDISK_IMAGE
+		mkdir $RAMDISK_IMAGE
+		cp -pr $RAMDISK_BASE/* $RAMDISK_IMAGE
+	fi
 	cmd "umount $RAMDISK_BASE" || error "Cannot unmount $RAMDISK_BASE"
 	cmd "rmdir $RAMDISK_BASE" \
 		|| error "Cannot remove mount point - $RAMDISK_BASE"
