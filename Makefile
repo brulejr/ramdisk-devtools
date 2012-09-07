@@ -1,5 +1,5 @@
 PROJECT=ramdisk-devtools
-REVISION = 0.0.1
+REVISION = 0.0.2
 BUILD=$(PROJECT)_$(REVISION)
 TARGET = $(BUILD).deb
 
