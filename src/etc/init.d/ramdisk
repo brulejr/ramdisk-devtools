@@ -53,7 +53,7 @@ do_start()
 	# load required software into ram disk
 	if [[ -n "$RAMDISK_IMAGE" && -d "$RAMDISK_IMAGE" ]]
 	then
-		cp -pr $RAMDISK_IMAGE/* $RAMDISK_BASE
+		cmd "cp -pr $RAMDISK_IMAGE/* $RAMDISK_BASE"
 	else
 		[[ -z "$ERRCODE" && -n "$RAMDISK_DATA" ]] && {
 			truncate --size 0 ${RAMDISK_PROF}
@@ -65,6 +65,7 @@ do_start()
 		}
 
 	fi
+	cmd "chmod go-wt $RAMDISK_BASE"
 
 	# return current status
 	return ${ERRCODE:-0}
@@ -76,9 +77,7 @@ do_stop()
 	mountpoint -q $RAMDISK_BASE || error "Not mounted - $RAMDISK_BASE"
 	if [[ -n "$RAMDISK_IMAGE" ]]
 	then
-		rm -fr $RAMDISK_IMAGE
-		mkdir $RAMDISK_IMAGE
-		cp -pr $RAMDISK_BASE/* $RAMDISK_IMAGE
+		cmd "rsync -qav $RAMDISK_BASE/* $RAMDISK_IMAGE"
 	fi
 	cmd "umount $RAMDISK_BASE" || error "Cannot unmount $RAMDISK_BASE"
 	cmd "rmdir $RAMDISK_BASE" \
