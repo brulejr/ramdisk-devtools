@@ -1,13 +1,15 @@
 ramdisk-devtools
 ================
 
-This project provides an Ubuntu / Debian Linux environment with a RAM disk auto-loaded with development tools 
-that benefit from memory-speed access. For example, both the [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+Given that most development machines have a mimimum of 8GB of memory, this project provides an Ubuntu / Debian Linux 
+system with a high-speed RAM disk that is auto-loaded with development tools. For example, both the
+[Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 and [Spring Tool Suite](http://www.springsource.org/sts) can bootstrap and run considerably faster when loaded
 from a RAM disk.
 
-If the **RAMDISK_IMAGE** parameter is set (see the [Configuration](https://github.com/brulejr/ramdisk-devtools/wiki/Configuration) 
-page), then the RAM disk contents are saved across a stop / start sequence.
+Additionally, if the **RAMDISK_IMAGE** parameter is set (see the [Configuration](https://github.com/brulejr/ramdisk-devtools/wiki/Configuration) 
+page), then the RAM disk contents are saved across a stop / start sequence, thus allowing the development tools to be
+tweaked.
 
 A JSON configuration file dictates which tools are loaded and how they are mapped into the environment. Currently, only
 *tgz* format is supported, although that will change to include *zip* as well. Eventually, lifecycle scripts will
