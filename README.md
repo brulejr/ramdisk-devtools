@@ -29,7 +29,9 @@ This will prompt for two parameteric settings:
 > **NOTE**: Once the package is installed, it is important to run its **init.d** script in order to prime the package 
 downloads. Currently, there is a bug that blocks this functionality from working at system startup. Executing this
 script can be accomplished using the following:
-> '/etc/init.d/ramdisk start'
+```
+/etc/init.d/ramdisk start
+```
 
 ### Configuration
 
