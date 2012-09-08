@@ -26,7 +26,7 @@ This will prompt for two parameteric settings:
 * The directory on which the RAM disk will be mounted (defaults to **/media/ramdisk**)
 * The size of the RAM disk (defaults to **1024M**)* 
 
-> <u>NOTE</u>: Once the package is installed, it is important to run its **init.d** script in order to prime the package 
+> **NOTE**: Once the package is installed, it is important to run its **init.d** script in order to prime the package 
 downloads. Currently, there is a bug that blocks this functionality from working at system startup.
 
 ### Configuration
